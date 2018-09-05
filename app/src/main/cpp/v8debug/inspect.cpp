@@ -1,5 +1,5 @@
 
-//#include "v8.h"
+#include "v8.h"
 #include "../include/v8-inspector.h"
 #include <time.h>
 
@@ -84,13 +84,13 @@ namespace tt {
         }
 
         void onException(TryCatch &catcher) {
-            HandleScope hs(isolate);
-            Local<Context> ctx = isolate->GetCurrentContext();
-
-            Local<Message> msg = catcher.Message();
-            String::Value str(isolate, msg->Get());
-            String::Value url(isolate, msg->GetScriptResourceName());
-            uint32_t scriptId = msg->GetScriptOrigin().ScriptID()->Uint32Value(ctx).FromMaybe(0);
+//            HandleScope hs(isolate);
+//            Local<Context> ctx = isolate->GetCurrentContext();
+//
+//            Local<Message> msg = catcher.Message();
+//            String::Value str(isolate, msg->Get());
+//            String::Value url(isolate, msg->GetScriptResourceName());
+//            uint32_t scriptId = msg->GetScriptOrigin().ScriptID()->Uint32Value(ctx).FromMaybe(0);
 
 //            inspector->exceptionThrown(
 //                    ctx,

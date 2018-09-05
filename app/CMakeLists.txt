@@ -4,11 +4,28 @@
 # Sets the minimum version of CMake required to build the native library.
 
 cmake_minimum_required(VERSION 3.4.1)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 
-# Creates and names a library, sets it as either STATIC
-# or SHARED, and provides the relative paths to its source code.
-# You can define multiple libraries, and CMake builds them for you.
-# Gradle automatically packages shared libraries with your APK.
+add_library( v8_base
+             STATIC
+             IMPORTED )
+set_target_properties( # Specifies the target library.
+                         v8_base
+
+                       # Specifies the parameter you want to define.
+                       # Provides the path to the library you want to import.
+                       PROPERTIES IMPORTED_LOCATION  ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libv8_base.a )
+
+
+add_library( v8_snapshot
+             STATIC
+             IMPORTED )
+set_target_properties( # Specifies the target library.
+                         v8_snapshot
+
+                       # Specifies the parameter you want to define.
+                       # Provides the path to the library you want to import.
+                       PROPERTIES IMPORTED_LOCATION  ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libv8_snapshot.a )
 
 add_library( # Sets the name of the library.
              native-lib
@@ -44,4 +61,10 @@ target_link_libraries( # Specifies the target library.
 
                        # Links the target library to the log library
                        # included in the NDK.
-                       ${log-lib} /Users/benylwang/GitHub/MyApplication/app/src/main/lib/libj2v8.so)
+                       ${log-lib}
+                       z
+                       android
+
+                       v8_base
+
+                       v8_snapshot)

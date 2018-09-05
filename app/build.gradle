@@ -11,9 +11,18 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
-                cppFlags "armeabi-v7a"
+                //arguments "-DANDROID_STL=c++_static","-DANDROID_ALLOW_UNDEFINED_SYMBOLS=TRUE","-DANDROID_TOOLCHAIN=gcc"
+                arguments "-DANDROID_STL=c++_static"
+
+                cppFlags "-frtti -fexceptions"
+
+                // Specifies the Application Binary Interfaces (ABI) that Gradle should build outputs for.
+                // The ABIs that Gradle packages into your APK are determined by NdkOptions.abiFilter()
+                // abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+                abiFilters 'armeabi-v7a','arm64-v8a'
             }
         }
+
     }
     buildTypes {
         release {

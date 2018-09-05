@@ -6,7 +6,7 @@
 #include "stdio.h"
 #include "../include/websocket.h"
 #include "zlib.h"
-
+#include <string.h>
 
 #define DEBUG_WS 0
 
