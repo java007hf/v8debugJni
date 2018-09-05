@@ -88,21 +88,21 @@ namespace tt {
             Local<Context> ctx = isolate->GetCurrentContext();
 
             Local<Message> msg = catcher.Message();
-            String::Value str(msg->Get());
-            String::Value url(msg->GetScriptResourceName());
+            String::Value str(isolate, msg->Get());
+            String::Value url(isolate, msg->GetScriptResourceName());
             uint32_t scriptId = msg->GetScriptOrigin().ScriptID()->Uint32Value(ctx).FromMaybe(0);
 
-            inspector->exceptionThrown(
-                    ctx,
-                    StringView(*str, str.length()),
-                    catcher.Exception(),
-                    StringView(*str, str.length()),
-                    StringView(*url, url.length()),
-                    msg->GetLineNumber(),
-                    msg->GetStartColumn(),
-                    inspector->createStackTrace(msg->GetStackTrace()),
-                    scriptId
-            );
+//            inspector->exceptionThrown(
+//                    ctx,
+//                    StringView(*str, str.length()),
+//                    catcher.Exception(),
+//                    StringView(*str, str.length()),
+//                    StringView(*url, url.length()),
+//                    msg->GetLineNumber(ctx),
+//                    msg->GetStartColumn(),
+//                    inspector->createStackTrace(msg->GetStackTrace()),
+//                    scriptId
+//            );
         }
 
         // 必须在 v8 线程内执行
